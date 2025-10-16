@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Изучаем GIT: калькулятор</title>
+  <link rel='stylesheet' href='css/reset.css'>
+
+  <style>
+    body {
+        max-width: 478px;
+    }
+    #navBar {    /* стиль фона под навигационными вкладками */
+      background-color: magenta;
+      padding-left: 10px;
+    }
+    nav>a {      /* стиль непостредственно вкладок */
+      display: inline-block;
+      min-width: 70px;
+      text-align: center;
+      font-size: 1.25em;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      padding: 5px;
+      margin: 10px 5px 0;
+      border-color: black;
+      border-width: 3px;
+      border-style: solid solid none;
+      background-color: silver;
+      border-radius: 10px 10px 0 0; }
+    a.active {    /* В активной вкладке стиль немного другой, чем в пассивных */
+      background-color: white; }
+  </style>
+
+  <script>
+    // Определяем, какой из интерфейсов калькулятора будет показываться при загрузке и перезагрузке.
+    // Нельзя удовлетвориться простым прописание значения в свойстве src тега iframe,
+    // поскольку содержимое iframe при перезагрузке сохраняется.
+    function fInitialization() {
+      document.getElementsByTagName('iframe')[0].src='calculator3.html';
+      console.log('Initialization is done');
+    }
+    // изменяем местоположение стиля "активной вкладки"
+    function changeTab(elem) {
+      var arList = document.getElementById('navBar').getElementsByTagName('a');
+      for (var i=0; i<arList.length; i++)
+        if (arList[i] != elem)
+          arList[i].className = '';
+        else
+          elem.className = 'active';
+    }
+  </script>
+
+</head>
+<body onLoad='fInitialization()'>
+
+<!-- Панель навигации -->
+<nav id='navBar'>
+  <a href='calculator1.html' target='mainFrame' onclick='changeTab(this);'># 1</a>
+  <a href='calculator2.html' target='mainFrame' onclick='changeTab(this);'># 2</a>
+  <a href='calculator3.html' target='mainFrame' onclick='changeTab(this);' class='active'># 3</a>
+  <a href='calculator4.html' target='mainFrame' onclick='changeTab(this);'># 4</a>
+</nav>
+
+<!-- Плавающий фрейм, внутри которого выводим другие страницы. В нашем случае это различные интерфейсы. -->
+<iframe name='mainFrame' src='' width='478' height='825' style='border-style:none; margin:30px 5px'>
+  <p>Your browser does not support iframes.</p>
+</iframe>
+
+</body>
+</html>
